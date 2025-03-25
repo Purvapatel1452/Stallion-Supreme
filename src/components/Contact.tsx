@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -8,11 +9,31 @@ const Contact: React.FC = () => {
     email: '',
     message: '',
   });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const form = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    setStatus('sending');
+
+    try {
+      if (form.current) {
+        await emailjs.sendForm(
+          'service_s7k3j9f',
+          'template_9y7ddar',  // Replace with your actual template ID
+          form.current,
+          'u_rFbVMIR0twf9Ydb'     // Replace with your actual public key
+        );
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' }); // Reset form
+        setTimeout(() => setStatus('idle'), 3000); // Reset status after 3 seconds
+      }
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -43,7 +64,7 @@ const Contact: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
                       Name
@@ -91,10 +112,23 @@ const Contact: React.FC = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full btn bg-white text-primary hover:bg-opacity-90"
+                    disabled={status === 'sending'}
+                    className="w-full btn bg-white text-primary hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {status === 'sending' ? 'Sending...' : 'Send Message'}
                   </button>
+                  
+                  {status === 'success' && (
+                    <p className="mt-2 text-green-400 text-center">
+                      Message sent successfully!
+                    </p>
+                  )}
+                  
+                  {status === 'error' && (
+                    <p className="mt-2 text-red-400 text-center">
+                      Failed to send message. Please try again.
+                    </p>
+                  )}
                 </form>
               </motion.div>
 

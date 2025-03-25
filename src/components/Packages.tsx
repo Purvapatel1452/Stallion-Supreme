@@ -95,7 +95,7 @@ const Packages: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8 text-center">
+                <div className="mt-auto text-center">
                   <button className="btn btn-primary w-full">
                     Get Started
                   </button>
