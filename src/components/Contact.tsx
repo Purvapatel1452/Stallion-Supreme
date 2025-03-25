@@ -5,8 +5,8 @@ import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    from_name: '',
+    from_email: '',
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -19,15 +19,24 @@ const Contact: React.FC = () => {
 
     try {
       if (form.current) {
-        await emailjs.sendForm(
+        // Prepare the message with sender's email included
+        const emailParams = {
+          from_name: formData.from_name,
+          from_email: formData.from_email,
+          message: `From: ${formData.from_name}\nEmail: ${formData.from_email}\n\nMessage:\n${formData.message}`,
+          to_email: 'stallionsupreme02@gmail.com'
+        };
+
+        await emailjs.send(
           'service_s7k3j9f',
-          'template_9y7ddar',  // Replace with your actual template ID
-          form.current,
-          'u_rFbVMIR0twf9Ydb'     // Replace with your actual public key
+          'template_9y7ddar',
+          emailParams,
+          'u_rFbVMIR0twf9Ydb'
         );
+        
         setStatus('success');
-        setFormData({ name: '', email: '', message: '' }); // Reset form
-        setTimeout(() => setStatus('idle'), 3000); // Reset status after 3 seconds
+        setFormData({ from_name: '', from_email: '', message: '' }); // Reset form
+        setTimeout(() => setStatus('idle'), 3000);
       }
     } catch (error) {
       console.error('Failed to send email:', error);
@@ -72,8 +81,8 @@ const Contact: React.FC = () => {
                     <input
                       type="text"
                       id="name"
-                      name="name"
-                      value={formData.name}
+                      name="from_name"
+                      value={formData.from_name}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40"
                       placeholder="Your name"
@@ -87,8 +96,8 @@ const Contact: React.FC = () => {
                     <input
                       type="email"
                       id="email"
-                      name="email"
-                      value={formData.email}
+                      name="from_email"
+                      value={formData.from_email}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40"
                       placeholder="your@email.com"
