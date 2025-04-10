@@ -49,6 +49,18 @@ const packages: Package[] = [
       'Monthly Reports & Growth Strategies'
     ],
   },
+  {
+    title: 'Custom One-Time Reel Service Section',
+    duration: 'Ek Reel, Dhamaka Deal!',
+    price: '₹8,000',
+    features: [
+      'Only Voice Over – Professional & impactful voice tone.',
+      'Only Editing – Raw video? We’ll turn it into a masterpiece.',
+      'Only Model – Don’t want to be on camera? We’ll be your face.',
+      'Full Package – From concept to execution, everything in one go.h',
+      'Delivery Time – 2-3 days max with express edit options.',
+    ],
+  },
 ];
 
 const Packages: React.FC = () => {
