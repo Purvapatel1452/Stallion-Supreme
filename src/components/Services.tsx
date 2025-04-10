@@ -76,7 +76,7 @@ const Services: React.FC = () => {
     <section id="services" className="section-padding bg-black-50 text-light">
   
              {/* Premium Services Section */}
-             <div className="mt-20">
+             <div className="m-20">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
