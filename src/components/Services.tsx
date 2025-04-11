@@ -54,7 +54,7 @@ const premiumServices = [
   },
   {
     title: 'Reel Series',
-    description: 'Full shoot + posting + boosting + performance report for 30 Reels in 30 Days.',
+    description: 'Full shoot + posting + boosting + performance report for 10 Reels in 30 Days.',
     icon: <FilmIcon className="w-12 h-12 text-primary" />,
   },
   {
@@ -100,8 +100,8 @@ const Services: React.FC = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="card group hover:shadow-xl border-2 border-primary/20 hover:border-primary/40 transition-colors"
                   >
-                    <div className="mb-6">{service.icon}</div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors text-dark">
+                    <div className= "mb-6" >{ service.icon } </div>
+                    <h3 className= "text-xl font-bold mb-3 group-hover:text-primary transition-colors text-dark" >
                       {service.title}
                     </h3>
                     <p className="text-gray-600">{service.description}</p>

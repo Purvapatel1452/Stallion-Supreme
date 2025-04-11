@@ -7,6 +7,7 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     from_name: '',
     from_email: '',
+    contact_number: '',
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -17,13 +18,20 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setStatus('sending');
 
+    if (!formData.from_email && !formData.contact_number) {
+      setStatus('error');
+      alert('Please provide either an email or a contact number.');
+      return;
+    }
+
     try {
       if (form.current) {
         // Prepare the message with sender's email included
         const emailParams = {
           from_name: formData.from_name,
           from_email: formData.from_email,
-          message: `From: ${formData.from_name}\nEmail: ${formData.from_email}\n\nMessage:\n${formData.message}`,
+          contact_number: formData.contact_number,
+          message: `From: ${formData.from_name}\nEmail: ${formData.from_email}\nContact: ${formData.contact_number}\n\nMessage:\n${formData.message}`,
           to_email: 'stallionsupreme02@gmail.com'
         };
 
@@ -35,7 +43,7 @@ const Contact: React.FC = () => {
         );
         
         setStatus('success');
-        setFormData({ from_name: '', from_email: '', message: '' }); // Reset form
+        setFormData({ from_name: '', from_email: '', contact_number: '', message: '' }); // Reset form
         setTimeout(() => setStatus('idle'), 3000);
       }
     } catch (error) {
@@ -101,7 +109,21 @@ const Contact: React.FC = () => {
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40"
                       placeholder="your@email.com"
-                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact" className="block text-sm font-medium mb-2">
+                      Contact Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="contact"
+                      name="contact_number"
+                      value={formData.contact_number}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40"
+                      placeholder="Your contact number"
+                      minLength={10}
                     />
                   </div>
                   <div>
@@ -169,17 +191,16 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
 
-                {/* <div className="flex items-start space-x-4">
+                <div className="flex items-start space-x-4">
                   <MapPinIcon className="w-6 h-6 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Visit Us</h3>
                     <p className="opacity-90">
-                      123 Business Street<br />
-                      Mumbai, Maharashtra<br />
-                      India
+                      F/3 Kanku Complex, Opp. Welcome Party Plot,<br />
+                      Modhera Road, Mehsana 2
                     </p>
                   </div>
-                </div> */}
+                </div>
 
                 <div className="pt-8">
                   <h3 className="font-semibold mb-4">Follow Us</h3>

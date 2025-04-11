@@ -42,7 +42,7 @@ const App: React.FC = () => {
               <span className="block text-2xl mt-4 text-primary">Social Media Marketing</span>
             </h1>
             <p className="text-xl mb-8 max-w-2xl mx-auto text-white/80">
-            We Don’t Just Post, We Perform.
+            We Don't Just Post, We Perform.
                 </p>
             <a 
               href="#services" 
@@ -62,29 +62,29 @@ const App: React.FC = () => {
       
               {/* Taglines Section */}
               <div className="my-20 relative">
-            <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform"></div>
-            <div className="relative py-16">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                {taglines.map((tagline, index) => (
-                  <motion.div
-                    key={tagline.text}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-center space-x-4 p-6 bg-white/5 rounded-lg backdrop-blur-sm border border-primary/10 hover:border-primary/20 transition-all duration-300"
-                  >
-                    <div className="p-3 bg-primary/10 rounded-full text-primary">
-                      {tagline.icon}
-                    </div>
-                    <p className="text-xl font-semibold text-dark">
-                      {tagline.text}
-                    </p>
-                  </motion.div>
-                ))}
+                <div className="absolute inset-0 bg-primary/10 -skew-y-3 transform"></div>
+                <div className="relative py-16">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    {taglines.map((tagline, index) => (
+                      <motion.div
+                        key={tagline.text}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="flex items-center space-x-4 p-8 bg-white rounded-lg shadow-lg border border-primary/20 hover:border-primary/40 transition-all duration-300"
+                      >
+                        <div className="p-4 bg-primary rounded-full text-white">
+                          {tagline.icon}
+                        </div>
+                        <p className="text-xl font-semibold text-primary">
+                          {tagline.text}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
           <Contact />
       </main>
 
