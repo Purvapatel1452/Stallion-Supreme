@@ -212,7 +212,7 @@ const Contact: React.FC = () => {
 
                     <div className="relative">
                       <a
-                        href={isFormValid() ? `https://wa.me/+919898391697?text=${getWhatsAppMessage()}` : '#'}
+                        href={isFormValid() ? `https://wa.me/+919227144346?text=${getWhatsAppMessage()}` : '#'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`flex items-center justify-center w-full px-4 py-3 text-white rounded-lg transition-colors duration-300 ${
