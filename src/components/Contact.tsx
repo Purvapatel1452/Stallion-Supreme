@@ -287,7 +287,7 @@ const Contact: React.FC = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Visit Us</h3>
                     <p className="opacity-90">
-                      F/3 Kanku Complex, Opp. Welcome Party Plot,<br />
+                      S/3 Kanku Complex, Opp. Welcome Party Plot,<br />
                       Modhera Road, Mehsana 2
                     </p>
                   </div>
